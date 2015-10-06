@@ -7,7 +7,7 @@ class CreateThreads < ActiveRecord::Migration
       t.string :title, null: false
       t.timestamps null: false
     end
-    add_foreing_key :threads, :threads, column: :parent_id
+    add_foreign_key :threads, :threads, column: :parent_id
     add_index :threads, [:user_id, :parent_id, :group_id], unique: true
   end
 end

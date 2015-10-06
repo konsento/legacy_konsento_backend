@@ -6,6 +6,6 @@ class CreateComments < ActiveRecord::Migration
       t.text :content, null: false
       t.timestamps null: false
     end
-    add_foreing_key :comments, :comments, column: :parent_id
+    add_foreign_key :comments, :comments, column: :parent_id
   end
 end

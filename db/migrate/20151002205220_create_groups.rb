@@ -5,6 +5,6 @@ class CreateGroups < ActiveRecord::Migration
       t.string :title, null: false
       t.timestamps null: false
     end
-    add_foreing_key :groups, :groups, column: :parent_id
+    add_foreign_key :groups, :groups, column: :parent_id
   end
 end
