@@ -5,6 +5,6 @@ class CreateGroupJoinRequirements < ActiveRecord::Migration
       t.references :join_requirement, null: false, foreign_key: true
       t.timestamps null: false
     end
-    add_index :group_join_requirements, [:group_id, :join_requirement_id], unique: true
+    add_index :group_join_requirements, [:group_id, :join_requirement_id], unique: true, name: 'group_join_requirements_index'
   end
 end
