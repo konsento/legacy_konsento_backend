@@ -59,14 +59,14 @@ ActiveRecord::Schema.define(version: 20151005223057) do
   create_table "proposals", force: :cascade do |t|
     t.integer  "user_id",    null: false
     t.integer  "parent_id"
-    t.integer  "thread_id",  null: false
+    t.integer  "topic_id",   null: false
     t.text     "content",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_index "proposals", ["parent_id"], name: "index_proposals_on_parent_id"
-  add_index "proposals", ["user_id", "parent_id", "thread_id"], name: "index_proposals_on_user_id_and_parent_id_and_thread_id", unique: true
+  add_index "proposals", ["user_id", "parent_id", "topic_id"], name: "index_proposals_on_user_id_and_parent_id_and_topic_id", unique: true
 
   create_table "references", force: :cascade do |t|
     t.integer  "user_id",     null: false
@@ -99,14 +99,14 @@ ActiveRecord::Schema.define(version: 20151005223057) do
 
   add_index "subscriptions", ["user_id", "group_id"], name: "index_subscriptions_on_user_id_and_group_id", unique: true
 
-  create_table "tag_threads", force: :cascade do |t|
-    t.integer  "thread_id",  null: false
+  create_table "tag_topics", force: :cascade do |t|
+    t.integer  "topic_id",   null: false
     t.integer  "tag_id",     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "tag_threads", ["thread_id", "tag_id"], name: "index_tag_threads_on_thread_id_and_tag_id", unique: true
+  add_index "tag_topics", ["topic_id", "tag_id"], name: "index_tag_topics_on_topic_id_and_tag_id", unique: true
 
   create_table "tags", force: :cascade do |t|
     t.string   "name",       null: false
@@ -114,16 +114,16 @@ ActiveRecord::Schema.define(version: 20151005223057) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "thread_comments", force: :cascade do |t|
-    t.integer  "thread_id",  null: false
+  create_table "topic_comments", force: :cascade do |t|
+    t.integer  "topic_id",   null: false
     t.integer  "comment_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "thread_comments", ["thread_id", "comment_id"], name: "index_thread_comments_on_thread_id_and_comment_id", unique: true
+  add_index "topic_comments", ["topic_id", "comment_id"], name: "index_topic_comments_on_topic_id_and_comment_id", unique: true
 
-  create_table "threads", force: :cascade do |t|
+  create_table "topics", force: :cascade do |t|
     t.integer  "user_id",    null: false
     t.integer  "parent_id"
     t.integer  "group_id",   null: false
@@ -132,8 +132,8 @@ ActiveRecord::Schema.define(version: 20151005223057) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "threads", ["parent_id"], name: "index_threads_on_parent_id"
-  add_index "threads", ["user_id", "parent_id", "group_id"], name: "index_threads_on_user_id_and_parent_id_and_group_id", unique: true
+  add_index "topics", ["parent_id"], name: "index_topics_on_parent_id"
+  add_index "topics", ["user_id", "parent_id", "group_id"], name: "index_topics_on_user_id_and_parent_id_and_group_id", unique: true
 
   create_table "users", force: :cascade do |t|
     t.string   "username",                       null: false
