@@ -6,8 +6,10 @@ class User < ActiveRecord::Base
   has_many :proposals
   has_many :requirement_values
   has_many :topics
+  has_many :invitations
 
   before_create :generate_authentication_token
+  before_create :set_available_invitations
 
   def generate_authentication_token
     loop do
@@ -27,5 +29,9 @@ class User < ActiveRecord::Base
 
   def authenticate(password)
     self.password == password
+  end
+
+  def set_available_invitations
+    self.available_invitations = 10
   end
 end

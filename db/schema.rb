@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151015180545) do
+ActiveRecord::Schema.define(version: 20151020220448) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -40,6 +40,18 @@ ActiveRecord::Schema.define(version: 20151015180545) do
   end
 
   add_index "groups", ["parent_id"], name: "index_groups_on_parent_id"
+
+  create_table "invitations", force: :cascade do |t|
+    t.integer  "user_id",                    null: false
+    t.string   "email",                      null: false
+    t.string   "token",                      null: false
+    t.boolean  "registered", default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "invitations", ["email"], name: "index_invitations_on_email", unique: true
+  add_index "invitations", ["token"], name: "index_invitations_on_token", unique: true
 
   create_table "join_requirements", force: :cascade do |t|
     t.string   "title"
@@ -136,12 +148,13 @@ ActiveRecord::Schema.define(version: 20151015180545) do
   add_index "topics", ["user_id", "parent_id", "group_id"], name: "index_topics_on_user_id_and_parent_id_and_group_id", unique: true
 
   create_table "users", force: :cascade do |t|
-    t.string   "username",                         null: false
-    t.string   "email",                            null: false
-    t.string   "encrypted_password",   limit: 128, null: false
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.string   "username",                          null: false
+    t.string   "email",                             null: false
+    t.string   "encrypted_password",    limit: 128, null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.string   "authentication_token"
+    t.integer  "available_invitations"
   end
 
   add_index "users", ["username"], name: "index_users_on_username"
