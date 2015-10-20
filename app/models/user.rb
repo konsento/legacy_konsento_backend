@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
   include BCrypt
-  has_secure_password
   has_many :subscriptions
   has_many :votes
   has_many :comments
