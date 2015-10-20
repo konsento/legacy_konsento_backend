@@ -1,4 +1,23 @@
 class Api::V1::BaseController  < ApplicationController
+  attr_accessor :current_user
+
+  def authenticate_user!
+    token, options = ActionController::HttpAuthentication::Token.token_and_options(request)
+
+    user_email = options.blank?? nil : options[:email]
+    user = user_email && User.find_by(email: user_email)
+
+    if user && ActiveSupport::SecurityUtils.secure_compare(user.authentication_token, token)
+      @current_user = user
+    else
+      return unauthenticated!
+    end
+  end
+
+  def unauthenticated!
+      response.headers['WWW-Authenticate'] = "Token realm=Application"
+      render json: { error: 'bad credentials' }, status: 401
+  end
 
   def api_error(status: 500, errors: [])
     unless Rails.env.production?
