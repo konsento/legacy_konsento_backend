@@ -5,7 +5,7 @@ class Api::V1::InvitationsController < Api::V1::BaseController
     puts has_available_invites?
     if has_available_invites?
       invitation = Invitation.new
-      invitation.email = create_params[:email]
+      invitation.email = user_params[:email]
       invitation.token = generate_token
       invitation.user = @current_user
       if invitation.save
@@ -31,7 +31,7 @@ class Api::V1::InvitationsController < Api::V1::BaseController
     @current_user.available_invitations > 0
   end
 
-  def create_params
-    params.permit(:email)
+  def user_params
+    params.require(:user).permit(:email)
   end
 end
