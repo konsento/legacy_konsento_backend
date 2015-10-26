@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151020220448) do
+ActiveRecord::Schema.define(version: 20151026183623) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -34,9 +34,10 @@ ActiveRecord::Schema.define(version: 20151020220448) do
 
   create_table "groups", force: :cascade do |t|
     t.integer  "parent_id"
-    t.string   "title",      null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "title",       null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.text     "description"
   end
 
   add_index "groups", ["parent_id"], name: "index_groups_on_parent_id"
