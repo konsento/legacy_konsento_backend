@@ -5,3 +5,5 @@ ruiz.username = "Ruiz"
 ruiz.email = "email@email.com"
 ruiz.password = "123456"
 ruiz.save
+
+global = Group.create(parent_id: nil, title: "Global", description: "Global group.")
