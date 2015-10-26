@@ -10,7 +10,7 @@ class Api::V1::UsersController < Api::V1::BaseController
     invitation = Invitation.find_by(token: invitation_params[:token])
     if invitation && !invitation.registered
       user = User.create(email: invitation.email, username: user_params[:username], password: user_params[:password])
-      if user.save
+      if user.persisted?
         invitation.update(registered: true)
         render( json: user, serializer: Api::V1::UserSerializer)
       end
