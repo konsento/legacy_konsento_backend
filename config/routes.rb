@@ -9,6 +9,7 @@ Rails.application.routes.draw do
         post :unsubscribe, on: :collection
       end
       resources :topics, only: [:create]
+      resources :proposals, only: [:create]
       post '/login', to: 'sessions#create'
     end
   end
