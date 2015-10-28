@@ -8,6 +8,6 @@ class CreateProposals < ActiveRecord::Migration
       t.timestamps null: false
     end
     add_foreign_key :proposals, :proposals, column: :parent_id
-    add_index :proposals, [:user_id, :parent_id, :topic_id], unique: true
+    add_index :proposals, [:user_id, :parent_id, :topic_id], unique: false
   end
 end

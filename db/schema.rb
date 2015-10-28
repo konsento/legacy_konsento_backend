@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 20151026183623) do
   end
 
   add_index "proposals", ["parent_id"], name: "index_proposals_on_parent_id"
-  add_index "proposals", ["user_id", "parent_id", "topic_id"], name: "index_proposals_on_user_id_and_parent_id_and_topic_id", unique: true
+  add_index "proposals", ["user_id", "parent_id", "topic_id"], name: "index_proposals_on_user_id_and_parent_id_and_topic_id"
 
   create_table "references", force: :cascade do |t|
     t.integer  "user_id",     null: false
