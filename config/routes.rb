@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       end
       resources :topics, only: [:create]
       resources :proposals, only: [:create]
+      resources :votes, only: [:create]
       post '/login', to: 'sessions#create'
     end
   end
