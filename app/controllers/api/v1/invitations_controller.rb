@@ -13,7 +13,7 @@ class Api::V1::InvitationsController < Api::V1::BaseController
         render( json: invitation, serializer: Api::V1::InvitationSerializer)
       end
     else
-      render json: { error: 'no available invites' }, status: 401
+      return api_error(status: 401, errors: 'no available invites')
     end
   end
 

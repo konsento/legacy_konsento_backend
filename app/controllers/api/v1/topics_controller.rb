@@ -11,7 +11,7 @@ class Api::V1::TopicsController < Api::V1::BaseController
     if topic.persisted?
       render( json: topic, serializer: Api::V1::TopicSerializer)
     else
-      return api_error(status: 401)
+      return api_error(status: 401, errors: topic.errors)
     end
   end
 

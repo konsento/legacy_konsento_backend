@@ -20,12 +20,11 @@ class Api::V1::BaseController  < ApplicationController
   end
 
   def api_error(status: 500, errors: [])
-    unless Rails.env.production?
-      puts errors.full_messages if errors.respond_to? :full_messages
+    if errors.empty?
+      head status: status
+    else
+      render json: jsonapi_format(errors).to_json, status: status
     end
-    head status: status and return if errors.empty?
-
-    render json: jsonapi_format(errors).to_json, status: status
   end
 
   def jsonapi_format(errors)

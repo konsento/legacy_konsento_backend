@@ -15,7 +15,7 @@ class Api::V1::UsersController < Api::V1::BaseController
         render( json: user, serializer: Api::V1::UserSerializer)
       end
     else
-      render json: { error: 'invalid invitation' }, status: 400
+      return api_error(status: 401, errors: 'invalid invitation')
     end
   end
 

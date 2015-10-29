@@ -7,7 +7,7 @@ class Api::V1::VotesController < Api::V1::BaseController
     if vote.valid?
       render( json: vote, serializer: Api::V1::VoteSerializer)
     else
-      return api_error(status: 401)
+      return api_error(status: 401, errors: vote.errors)
     end
   end
 

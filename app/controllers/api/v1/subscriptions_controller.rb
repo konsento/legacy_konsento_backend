@@ -7,7 +7,7 @@ class Api::V1::SubscriptionsController < Api::V1::BaseController
     if subscription.persisted?
       render( json: subscription, serializer: Api::V1::SubscriptionSerializer)
     else
-      return api_error(status: 401)
+      return api_error(status: 401, errors: subscription.errors)
     end
   end
 
@@ -16,7 +16,7 @@ class Api::V1::SubscriptionsController < Api::V1::BaseController
     if subscription.destroy
       head status:200
     else
-      return api_error(status: 401)
+      return api_error(status: 401, errors: subscription.errors)
     end
   end
 

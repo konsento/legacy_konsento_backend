@@ -11,7 +11,7 @@ class Api::V1::ProposalsController < Api::V1::BaseController
     if proposal.persisted?
         render( json: proposal, serializer: Api::V1::ProposalSerializer)
     else
-      return api_error(status: 401)
+      return api_error(status: 401, errors: proposal.errors)
     end
   end
 
