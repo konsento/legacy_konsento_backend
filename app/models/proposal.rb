@@ -4,5 +4,5 @@ class Proposal < ActiveRecord::Base
   belongs_to :topic
   has_many :votes
   has_many :references
-  has_and_belongs_to_many :comments
+  has_many :comments, as: :commentable
 end

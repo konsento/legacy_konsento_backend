@@ -14,13 +14,16 @@
 ActiveRecord::Schema.define(version: 20151026183623) do
 
   create_table "comments", force: :cascade do |t|
-    t.integer  "user_id",    null: false
+    t.integer  "user_id",          null: false
     t.integer  "parent_id"
-    t.text     "content",    null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "content",          null: false
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
+  add_index "comments", ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
   add_index "comments", ["parent_id"], name: "index_comments_on_parent_id"
 
   create_table "group_join_requirements", force: :cascade do |t|
