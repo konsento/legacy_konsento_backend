@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :topics, only: [:create]
       resources :proposals, only: [:create]
       resources :votes, only: [:create]
+      resources :comments, only: [:create]
       post '/login', to: 'sessions#create'
     end
   end
