@@ -1,2 +1,2 @@
-module RequirementValue
+module RequirementValuesHelper
 end

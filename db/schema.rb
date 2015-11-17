@@ -26,15 +26,6 @@ ActiveRecord::Schema.define(version: 20151026183623) do
   add_index "comments", ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
   add_index "comments", ["parent_id"], name: "index_comments_on_parent_id"
 
-  create_table "group_join_requirements", force: :cascade do |t|
-    t.integer  "group_id",            null: false
-    t.integer  "join_requirement_id", null: false
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-  end
-
-  add_index "group_join_requirements", ["group_id", "join_requirement_id"], name: "group_join_requirements_index", unique: true
-
   create_table "groups", force: :cascade do |t|
     t.integer  "parent_id"
     t.string   "title",       null: false
@@ -44,6 +35,15 @@ ActiveRecord::Schema.define(version: 20151026183623) do
   end
 
   add_index "groups", ["parent_id"], name: "index_groups_on_parent_id"
+
+  create_table "groups_join_requirements", force: :cascade do |t|
+    t.integer  "group_id",            null: false
+    t.integer  "join_requirement_id", null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "groups_join_requirements", ["group_id", "join_requirement_id"], name: "groups_join_requirements_index", unique: true
 
   create_table "invitations", force: :cascade do |t|
     t.integer  "user_id",                    null: false
