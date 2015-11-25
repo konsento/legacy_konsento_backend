@@ -5,5 +5,5 @@ class ApplicationController < ActionController::Base
 
   def destroy_session
     request.session_options[:skip] = true
-  end
+  end  
 end
